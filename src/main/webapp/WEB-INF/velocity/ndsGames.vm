@@ -1,0 +1,42 @@
+<script src="../resource/js/layout.js"></script>
+<div>
+    <table id="myTable">
+        <thead>
+        <tr>
+
+            <th><div width="200">名称</div></th>
+            <th>发布日期</th>
+            <th>推荐度</th>
+            <th>发行公司</th>
+
+            <th>简介</th>
+            <th>类型</th>
+            <th>大小</th>
+            <th>汉化组</th>
+
+            <th>链接</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            #foreach( $elem in $games)
+
+            <tr>
+                <td width="200">$elem.name</td>
+                <td width="100">$elem.date</td>
+                <td>$elem.recommend</td>
+                <td>$elem.publisher</td>
+
+                <td>$elem.intro</td>
+                <td>$elem.type</td>
+                <td>$elem.size</td>
+                <td>$elem.releaser</td>
+
+                <td>$elem.url</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+
+</div>
+

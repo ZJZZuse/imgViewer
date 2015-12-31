@@ -1,0 +1,54 @@
+
+
+<link rel="stylesheet" type="text/css"
+      href="http://www.twospy.com/galleriffic/css/basic.css"/>
+
+<link rel="stylesheet" type="text/css"
+          href="http://www.twospy.com/galleriffic/css/galleriffic-2.css"/>
+
+<script src="http://www.twospy.com/galleriffic/js/jquery.galleriffic.js"></script>
+##<script src="../resource/js/imgs.js"></script>
+
+##<script src="../resource/js/imgs.js___jb_bak___"></script>
+
+<div id="controls"></div>
+<div id="loading"></div>
+<div id="slideshow"></div>
+<div id="caption"></div>
+
+<div id="thumbs" style="height: 100%">
+    <ul class="thumbs noscript">
+
+        #foreach($ele in $imgs)
+
+            #set($hrefT = "/imgs/acqSingleImg?path=$ele.path")
+
+            <li>
+                <a class="thumb" name="optionalCustomIdentifier" href="$hrefT" title="$ele.nameForShow">
+                    <img src="$hrefT" alt="$ele.nameForShow"/>
+                </a>
+
+                <div class="caption">
+                    $ele.nameForShow
+                </div>
+            </li>
+
+        #end
+
+
+    </ul>
+</div>
+
+<script type="text/javascript">
+    // We only want these styles applied when javascript is enabled
+    $('div.navigation').css({'width' : '300px', 'float' : 'left'});
+    $('div.content').css('display', 'block');
+
+    $(document).ready(function() {
+        // Initialize Minimal Galleriffic Gallery
+        $('#thumbs').galleriffic({
+            imageContainerSel:      '#slideshow',
+            controlsContainerSel:   '#controls'
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+
+##<script src="../resource/js/imgs.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="../resource/js/themes/classic/galleria.classic.css"/>
+
+<script src="../resource/js/galleria.js"></script>
+
+<div class="galleria" style="height: 100%">
+
+
+    #foreach($ele in $imgs)
+
+        #set($hrefT = "/imgs/acqSingleImg?path=$ele.path")
+
+        <a href="$hrefT"><img src="$hrefT" data-big="$hrefT" data-title="$ele.nameForShow" data-description="$ele.nameForShow"></a>
+
+    #end
+
+</div>
+
+<script>
+    Galleria.loadTheme('../resource/js/themes/classic/galleria.classic.js');
+    Galleria.run('.galleria');
+
+    Galleria.configure({
+        imageCrop: false,
+//        transition: 'fade'
+        autoplay: 3000
+        ,
+        fullscreenCrop:true
+    });
+//    $('.galleria').data('galleria').enterFullscreen();
+</script>
