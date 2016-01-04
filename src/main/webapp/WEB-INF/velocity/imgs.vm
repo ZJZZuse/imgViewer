@@ -1,4 +1,3 @@
-
 ##<script src="../resource/js/imgs.js"></script>
 <link rel="stylesheet" type="text/css"
       href="../resource/js/themes/classic/galleria.classic.css"/>
@@ -17,23 +16,46 @@
 ##    #end
 
     #macro(buildSingleImg $ele,$hrefT)
-        <a href="$hrefT"><img src="$hrefT" data-big="$hrefT" data-title="$ele.nameForShow" data-description="$ele.nameForShow"></a>
+        <a href="$hrefT"><img src="$hrefT" data-big="$hrefT" data-title="$ele.nameForShow"
+                              data-description="$ele.nameForShow"></a>
     #end
 
     #parse("imgFragment.vm")
 
 </div>
 
+<label for="delayTimeTv">delayTimeTv</label> <input type="text" id="delayTimeTv" value="1000"/>
+
 <script>
     Galleria.loadTheme('../resource/js/themes/classic/galleria.classic.js');
-    Galleria.run('.galleria');
+
 
     Galleria.configure({
         imageCrop: false,
+        lightbox: true
+//        ,
 //        transition: 'fade'
-        autoplay: 3000
-        ,
-        fullscreenCrop:true
+//        autoplay: 3000
     });
-//    $('.galleria').data('galleria').enterFullscreen();
+    //    $('.galleria').data('galleria').enterFullscreen();
+    Galleria.run('.galleria');
+
+    // bind the method to Galleria.ready
+    Galleria.ready(function (options) {
+
+        // this = the gallery instance
+        // options = the gallery options
+
+        this.attachKeyboard({
+            left: this.prev, // applies the native prev() function
+            right: this.next,
+            up: this.toggleFullscreen,
+
+            return: function () {
+                this.playToggle($("#delayTimeTv").val());
+            }
+        });
+
+    });
+
 </script>
