@@ -1,11 +1,18 @@
 package com.isoftstone.kaoqin.vo;
 
+import org.springframework.beans.BeanUtils;
+
+import java.io.File;
+
 public class ImgsVo {
 
     public static String basePath = "D:/abc/t/img";
 
+    private String basePathP;
 
     private String path;
+
+    private String abstractPath;
 
     private String parentFolderName;
 
@@ -13,11 +20,29 @@ public class ImgsVo {
 
     private String nameForShow;
 
+    public ImgsVo() {
+    }
+
+    public ImgsVo(String basePathP) {
+        this.basePathP = basePathP;
+    }
+
+    public String getAbstractPath() {
+        return abstractPath;
+    }
+
+    public void setAbstractPath(String abstractPath) {
+        this.abstractPath = abstractPath;
+    }
+
     public String getNameForShow() {
         return nameForShow;
     }
 
-    public void setNameForShow() {
+    public void setNameForShowAndAbstractPath() {
+
+        abstractPath = (basePathP == null || basePathP.isEmpty()) ? basePath + File.separator + path : basePathP + File.separator + path;
+
         this.nameForShow = parentFolderName + "-" + name;
     }
 

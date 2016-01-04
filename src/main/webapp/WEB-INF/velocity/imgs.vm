@@ -8,13 +8,19 @@
 <div class="galleria" style="height: 100%">
 
 
-    #foreach($ele in $imgs)
+##    #foreach($ele in $imgs)
+##
+##        #set($hrefT = "/imgs/acqSingleImg?path=$ele.abstractPath")
+##
+##        <a href="$hrefT"><img src="$hrefT" data-big="$hrefT" data-title="$ele.nameForShow" data-description="$ele.nameForShow"></a>
+##
+##    #end
 
-        #set($hrefT = "/imgs/acqSingleImg?path=$ele.path")
-
+    #macro(buildSingleImg $ele,$hrefT)
         <a href="$hrefT"><img src="$hrefT" data-big="$hrefT" data-title="$ele.nameForShow" data-description="$ele.nameForShow"></a>
-
     #end
+
+    #parse("imgFragment.vm")
 
 </div>
 

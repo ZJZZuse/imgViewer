@@ -1,7 +1,6 @@
 package com.isoftstone.kaoqin.controller;
 
 import com.isoftstone.kaoqin.service.ImgsService;
-import com.isoftstone.kaoqin.vo.ImgsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +22,30 @@ public class ImgsController {
     @Autowired
     private ImgsService imgsService;
 
-    @RequestMapping("/acqImgs")
+    @RequestMapping("/acqImgsByCus")
+    public String acqImgs(HttpServletRequest request,String index,String basePath,String keyWord) {
+
+        request.setAttribute("imgs", imgsService.acqImgs(keyWord,basePath).getData());
+
+        return "imgs" + index;
+    }
+
+    @RequestMapping("/acqImgsByIndex")
     public String acqImgs(HttpServletRequest request,String index) {
 
         request.setAttribute("imgs", imgsService.acqAllImgs().getData());
 
         return "imgs" + index;
     }
+
+    @RequestMapping("/acqAllImgs")
+    public String acqImgs(HttpServletRequest request) {
+
+        request.setAttribute("imgs", imgsService.acqAllImgs().getData());
+
+        return "imgs";
+    }
+
 
 
     @RequestMapping(value = "/acqSingleImg")
@@ -38,7 +54,7 @@ public class ImgsController {
         response.setContentType("image/jpg");
         try {
             OutputStream out = response.getOutputStream();
-            File file = new File(ImgsVo.basePath + File.separator + path);
+            File file = new File(path);
             fis = new FileInputStream(file);
             byte[] b = new byte[fis.available()];
             fis.read(b);

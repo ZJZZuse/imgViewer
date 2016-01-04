@@ -26,16 +26,45 @@ public class ImgsServiceImpl implements ImgsService {
 
         ImgsExample exa = new ImgsExample();
 
-        List<ImgsVo> vos = new ArrayList<ImgsVo>();
-
         List<Imgs> imgses = imgsMapper.selectByExample(exa);
+
+        return doImgPreHandler(imgses);
+    }
+
+    public MyResult acqImgs(String condition) {
+
+        ImgsExample exa = new ImgsExample();
+
+        exa.or().andPathLike(condition);
+
+        return doImgPreHandler(imgsMapper.selectByExample(exa));
+    }
+
+    public MyResult acqImgs(String condition, String bathPath) {
+
+        ImgsExample exa = new ImgsExample();
+
+        exa.or().andPathLike(condition);
+
+        return doImgPreHandler(imgsMapper.selectByExample(exa), bathPath);
+
+    }
+
+    private MyResult doImgPreHandler(List<Imgs> imgses) {
+
+        return doImgPreHandler(imgses,null);
+    }
+
+    private MyResult doImgPreHandler(List<Imgs> imgses, String bathPath) {
+
+        List<ImgsVo> vos = new ArrayList<ImgsVo>();
 
         for (Imgs ele : imgses) {
 
-            ImgsVo voT = new ImgsVo();
+            ImgsVo voT = new ImgsVo(bathPath);
 
             BeanUtils.copyProperties(ele, voT);
-            voT.setNameForShow();
+            voT.setNameForShowAndAbstractPath();
 
             vos.add(voT);
         }

@@ -21,7 +21,7 @@
 
         #foreach($ele in $imgs)
 
-            #set($hrefT = "/imgs/acqSingleImg?path=$ele.path")
+            #set($hrefT = "/imgs/acqSingleImg?path=$ele.abstractPath")
 
             <li>
                 <a class="thumb" name="optionalCustomIdentifier" href="$hrefT" title="$ele.nameForShow">

@@ -1,0 +1,7 @@
+#foreach($ele in $imgs)
+
+    #set($hrefT = "/imgs/acqSingleImg?path=$ele.abstractPath")
+
+    #buildSingleImg($ele,$hrefT)
+
+#end
